@@ -110,12 +110,19 @@ V20Seq1Inplace = partial(VNSeqMInplace, N=20, M=1, num_init_views=4)
 V10Seq1Inplace = partial(VNSeqMInplace, N=10, M=1, num_init_views=2)
 V20Seq4Inplace = partial(VNSeqMInplace, N=20, M=4, num_init_views=4, interval_epochs=300)
 
+# Added Schemas
+V30Seq4Inplace = partial(VNSeqMInplace, N=32, M=4, num_init_views=12, interval_epochs=300)
+V100Seq1Inplace = partial(VNSeqMInplace, N=100, M=1, num_init_views=12, interval_epochs=100)
+V50Seq4Inplace = partial(VNSeqMInplace, N=50, M=4, num_init_views=8, interval_epochs=300)
 
-
+# N = total views to select
+# M = # views to select each time
 
 schema_dict: Dict[str, BaseSchema] = {'all': All, "debug": V20Seq1Debug,
                                       "v20seq1_inplace": V20Seq1Inplace, "v10seq1_inplace": V10Seq1Inplace,
                                       "v20seq4_inplace": V20Seq4Inplace,
+                                      "v30seq4_inplace": V30Seq4Inplace, "v100seq1_inplace": V100Seq1Inplace,
+                                      "v50seq4_inplace": V50Seq4Inplace,
                                       }
 
 override_test_idxs_dict: Dict[str, List[int]] = {"basket": list(range(42, 50,2)), "africa": list(range(6, 14, 2)),

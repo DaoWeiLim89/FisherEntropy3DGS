@@ -7,6 +7,7 @@ import sys
 from scene import Scene, GaussianModel
 from utils.general_utils import safe_state
 import uuid
+import time
 from tqdm import tqdm
 from utils.image_utils import psnr
 from argparse import ArgumentParser, Namespace
@@ -321,6 +322,7 @@ if __name__ == "__main__":
     parser.add_argument("--filter_out_grad", nargs="+", type=str, default=["rotation"])
     parser.add_argument("--log_every_image", action="store_true", help="log every images during traing")
     parser.add_argument("--override_idxs", default=None, type=str, help="speical test idxs on uncertainty evaluation")
+    parser.add_argument("--entropy_use", action="store_true", help="use entropy to select views")
 
     args = parser.parse_args(sys.argv[1:])
     args.save_iterations.append(args.iterations)
@@ -334,7 +336,10 @@ if __name__ == "__main__":
 
     print("Optimizing " + args.model_path)
 
-    wandb.init(project='active', resume="allow", id=os.path.split(args.model_path.rstrip('/'))[-1], config=vars(args))
+    # Create unique run ID with timestamp to avoid conflicts with previous runs
+    base_id = os.path.split(args.model_path.rstrip('/'))[-1]
+    unique_id = f"{base_id}_{int(time.time())}"
+    wandb.init(project='active', id=unique_id, config=vars(args))
 
     # Initialize system state (RNG)
     safe_state(args.quiet, seed=args.seed)

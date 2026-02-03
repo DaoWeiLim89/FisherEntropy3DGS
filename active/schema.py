@@ -108,7 +108,7 @@ class VNSeqMInplace(BaseSchema):
 
 V20Seq1Inplace = partial(VNSeqMInplace, N=20, M=1, num_init_views=4)
 V10Seq1Inplace = partial(VNSeqMInplace, N=10, M=1, num_init_views=2)
-V20Seq4Inplace = partial(VNSeqMInplace, N=20, M=4, num_init_views=4, interval_epochs=300)
+V20Seq4Inplace = partial(VNSeqMInplace, N=28, M=4, num_init_views=4, interval_epochs=300)
 
 # Added Schemas
 V30Seq4Inplace = partial(VNSeqMInplace, N=32, M=4, num_init_views=12, interval_epochs=300)

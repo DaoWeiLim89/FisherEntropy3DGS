@@ -72,7 +72,7 @@ class HEntropySelector(torch.nn.Module):
         H_train = torch.zeros(sum(p.numel() for p in params), device=params[0].device, dtype=params[0].dtype)
 
         candidate_cameras = scene.getCandidateCameras()
-        # Run heesian on training set
+        # Run hessian on training set
         for cam in tqdm(viewpoint_cams, desc="Calculating diagonal Hessian on training views"):
             if exit_func():
                 raise RuntimeError("csm should exit early")
